@@ -31,7 +31,7 @@ class QuantileRegression:
         self.theta = np.zeros(n)
         loss = []
         
-        for i in range(epochs):
+        for epoch in range(epochs):
             y_pred = self.predict(x)
 
             gradient = self.sub_gradient(x, y, y_pred)
