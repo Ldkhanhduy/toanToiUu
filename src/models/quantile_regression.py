@@ -40,8 +40,8 @@ class QuantileRegression:
             cur_loss = self.pinball_loss(y, y_pred)
             loss.append(cur_loss)
 
-            if epoch % verbose == 0 or epoch == epochs -1:
-                print(f"Epoch {epoch}/{epochs}, Loss: {cur_loss:.4f}")
+            if i % verbose == 0 or i == epochs -1:
+                print(f"Epoch {i}/{epochs}, Loss: {cur_loss:.4f}")
         
         return loss
     
