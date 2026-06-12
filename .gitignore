@@ -13,8 +13,6 @@ venv/
 .venv/
 env/
 
-dataset/foodDeli
-dataset/foodDeli_processed
 
 .ipynb_checkpoints/
 
