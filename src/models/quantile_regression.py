@@ -31,7 +31,7 @@ class QuantileRegression:
         self.theta = np.zeros(n)
         loss = []
         
-        for i in range(epochs):
+        for epoch in range(epochs):
             y_pred = self.predict(x)
 
             gradient = self.sub_gradient(x, y, y_pred)
@@ -40,9 +40,8 @@ class QuantileRegression:
             cur_loss = self.pinball_loss(y, y_pred)
             loss.append(cur_loss)
 
-            if i % verbose == 0 or i == epochs -1:
-                print(f"Epoch {i}/{epochs}, Loss: {cur_loss:.4f}")
+            if epoch % verbose == 0 or epoch == epochs - 1:
+                print(f"Epoch {epoch}/{epochs}, Loss: {cur_loss:.4f}")
         
         return loss
     
-
