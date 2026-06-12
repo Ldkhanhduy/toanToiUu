@@ -1,11 +1,11 @@
 import numpy as np
 
 class RMSPropOtimizer:
-    def __init__(self, lr=0.001, beta=0.9, epsilon=1e-8):
+    def __init__(self, lr: float=0.001, beta: float=0.9, epsilon: float=1e-8):
         self.lr = lr
         self.beta = beta
         self.epsilon = epsilon
-        self.v = v
+        self.v = None
 
     def update(self, theta, gradient):
         if self.v is None:
@@ -15,4 +15,4 @@ class RMSPropOtimizer:
 
         theta_new = theta - (self.lr/np.sqrt(self.v + self.epsilon)) * gradient
 
-    return theta_new
+        return theta_new
