@@ -1,6 +1,6 @@
 import numpy as np
 
-class QuantileRegression:
+class QuantileRegressionV1:
     def __init__(self, tau=0.9, optimizer=None):
         if not (0 < tau < 1):
             raise ValueError('tau must be between 0 and 1')
@@ -8,6 +8,7 @@ class QuantileRegression:
         self.tau = tau
         self.optimizer = optimizer
         self.theta = None
+        self.loss = []
 
     def predict(self, x):
         return np.dot(x, self.theta)
@@ -29,7 +30,7 @@ class QuantileRegression:
         n = x.shape[1]
 
         self.theta = np.zeros(n)
-        loss = []
+        self.loss = []
         
         for epoch in range(epochs):
             y_pred = self.predict(x)
@@ -38,11 +39,10 @@ class QuantileRegression:
             self.theta = self.optimizer.update(self.theta, gradient)
 
             cur_loss = self.pinball_loss(y, y_pred)
-            loss.append(cur_loss)
+            self.loss.append(cur_loss)
 
             if epoch % verbose == 0 or epoch == epochs - 1:
                 print(f"Epoch {epoch}/{epochs}, Loss: {cur_loss:.4f}")
-        return loss
 
     def save_weights(self, filepath):
         if self.theta is None:
@@ -53,3 +53,4 @@ class QuantileRegression:
     def load_weights(self, filepath):
         self.theta = np.load(filepath)
         print(f"Loaded.")
+
