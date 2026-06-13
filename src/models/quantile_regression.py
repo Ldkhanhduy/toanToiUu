@@ -42,6 +42,14 @@ class QuantileRegression:
 
             if epoch % verbose == 0 or epoch == epochs - 1:
                 print(f"Epoch {epoch}/{epochs}, Loss: {cur_loss:.4f}")
-        
         return loss
-    
+
+    def save_weights(self, filepath):
+        if self.theta is None:
+            raise ValueError('Model has not been trained yet. No weights to save.')
+        np.save(filepath, self.theta)
+        print(f"Saved.")
+
+    def load_weights(self, filepath):
+        self.theta = np.load(filepath)
+        print(f"Loaded.")
