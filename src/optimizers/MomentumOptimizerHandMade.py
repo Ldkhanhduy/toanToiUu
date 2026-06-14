@@ -1,3 +1,5 @@
+import numpy as np
+
 class MomentumOptimizerHandMade:
     """
     Công thức:
@@ -21,10 +23,9 @@ class MomentumOptimizerHandMade:
     
     def update(self, theta, gradients):
         if self.velocity is None:
-            self.velocity = [0.0 for _ in theta]
+            self.velocity = np.zeros_like(theta)
 
-        for i in range(len(theta)):
-            self.velocity[i] = (self.momentum*self.velocity[i] - self.learning_rate*gradients[i])
-            theta[i] += self.velocity[i]
+        self.velocity = self.momentum*self.velocity - self.learning_rate*gradients
+        theta += self.velocity
 
         return theta
