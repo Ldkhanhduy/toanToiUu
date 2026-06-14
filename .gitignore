@@ -28,4 +28,4 @@ desktop.ini
 
 *.log
 
-notebooks/training/*.ipynb
+notebooks/training/useMomentumTrain.ipynb
