@@ -5,6 +5,9 @@ import pandas as pd
 
 from src.models.quantile_regression import QuantileRegressionV1
 
+# Thư mục gốc của project (nơi chứa main.py)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 def mae(y_true, y_pred):
     return np.mean(np.abs(y_true - y_pred))
 
@@ -14,35 +17,35 @@ def rmse(y_true, y_pred):
 
 models_info = {
     "Adam": {
-        "best_theta": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\adam\adam_theta01.npy",
+        "best_theta": os.path.join(BASE_DIR, "results", "weights", "adam", "adam_theta01.npy"),
         "losses": {
-            "lr = 0.1":  r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\adam\adam_loss1.npy",
-            "lr = 0.05": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\adam\adam_loss05.npy",
-            "lr = 0.01": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\adam\adam_loss01.npy"
+            "lr = 0.1":  os.path.join(BASE_DIR, "results", "weights", "adam", "adam_loss1.npy"),
+            "lr = 0.05": os.path.join(BASE_DIR, "results", "weights", "adam", "adam_loss05.npy"),
+            "lr = 0.01": os.path.join(BASE_DIR, "results", "weights", "adam", "adam_loss01.npy")
         }
     },
     "Momentum": {
-        "best_theta": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\momentum\momentum_weights_005.npy",
+        "best_theta": os.path.join(BASE_DIR, "results", "weights", "momentum", "momentum_weights_005.npy"),
         "losses": {
-            "lr = 0.1":  r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\momentum\momentum_loss_history_01.npy",
-            "lr = 0.05": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\momentum\momentum_loss_history_005.npy",
-            "lr = 0.01": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\momentum\momentum_loss_history_001.npy"
+            "lr = 0.1":  os.path.join(BASE_DIR, "results", "weights", "momentum", "momentum_loss_history_01.npy"),
+            "lr = 0.05": os.path.join(BASE_DIR, "results", "weights", "momentum", "momentum_loss_history_005.npy"),
+            "lr = 0.01": os.path.join(BASE_DIR, "results", "weights", "momentum", "momentum_loss_history_001.npy")
         }
     },
     "Nesterov": {
-        "best_theta": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\Nesterov\nesterov_weights.npy",
+        "best_theta": os.path.join(BASE_DIR, "results", "weights", "Nesterov", "nesterov_weights.npy"),
         "losses": {
-            "lr = 0.1":  r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\Nesterov\nesterov_loss_1.npy",
-            "lr = 0.05": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\Nesterov\nesterov_loss_05.npy",
-            "lr = 0.01": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\Nesterov\nesterov_loss_01.npy"
+            "lr = 0.1":  os.path.join(BASE_DIR, "results", "weights", "Nesterov", "nesterov_loss_1.npy"),
+            "lr = 0.05": os.path.join(BASE_DIR, "results", "weights", "Nesterov", "nesterov_loss_05.npy"),
+            "lr = 0.01": os.path.join(BASE_DIR, "results", "weights", "Nesterov", "nesterov_loss_01.npy")
         }
     },
     "RMSProp": {
-        "best_theta": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\RMSProp\rms_weights.npy",
+        "best_theta": os.path.join(BASE_DIR, "results", "weights", "RMSProp", "rms_weights.npy"),
         "losses": {
-            "lr = 0.1":  r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\RMSProp\rms_loss_1.npy",
-            "lr = 0.05": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\RMSProp\rms_loss_05.npy",
-            "lr = 0.01": r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\weights\RMSProp\rms_loss_01.npy"
+            "lr = 0.1":  os.path.join(BASE_DIR, "results", "weights", "RMSProp", "rms_loss_1.npy"),
+            "lr = 0.05": os.path.join(BASE_DIR, "results", "weights", "RMSProp", "rms_loss_05.npy"),
+            "lr = 0.01": os.path.join(BASE_DIR, "results", "weights", "RMSProp", "rms_loss_01.npy")
         }
     }
 }
@@ -113,14 +116,14 @@ def main_evaluate_and_plot(X_test, y_test):
     fig.suptitle('Tác Động Của Learning Rate Đến Quá Trình Hội Tụ', fontsize=20, fontweight='bold', y=1.03)
     plt.tight_layout()
     
-    plots_dir = r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\results\plots"
+    plots_dir = os.path.join(BASE_DIR, "results", "plots")
     os.makedirs(plots_dir, exist_ok=True)
     final_plot_path = os.path.join(plots_dir, "final_lr_comparison_subplots.png")
     plt.savefig(final_plot_path, dpi=300, bbox_inches='tight')
     plt.show()
     
 
-test_path = r"D:\STUDY\25-26\HK2\toan_toi_uu\toanToiUu\dataset\foodDeli_processed\test_processed.csv"
+test_path = os.path.join(BASE_DIR, "dataset", "foodDeli_processed", "test_processed.csv")
 df_test = pd.read_csv(test_path).dropna()
 target_column = 'Time_taken' 
 columns_to_drop = ['ID', target_column]
