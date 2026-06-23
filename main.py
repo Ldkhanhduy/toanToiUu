@@ -6,6 +6,9 @@ import pandas as pd
 from sklearn.linear_model import QuantileRegressor
 from src.models.quantile_regression import QuantileRegressionV1
 
+# Thư mục gốc của project (nơi chứa main.py)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 def mae(y_true, y_pred):
     return np.mean(np.abs(y_true - y_pred))
 
@@ -30,7 +33,7 @@ models_info = {
     },
     "RMSProp": {
         "best_theta": "results/weights/RMSProp/rms_weights.npy",
-        "best_loss_path": "results/weights/RMSProp/rms_loss_01.npy",
+        "best_loss_path": "results/weights/RMSProp/rms_loss_1.npy",
         "color": "#9b59b6"
     }
 }
@@ -94,7 +97,7 @@ def main_evaluate_and_plot(X_test_final, X_test_raw, y_test, X_train_raw, y_trai
     for name, info in models_info.items():
         try:
             loss_data = np.load(info["best_loss_path"])
-            plt.plot(loss_data, label=f"{name}", color=info["color"], linewidth=2.5, alpha=0.9)
+            plt.plot(loss_data[:10000], label=f"{name}", color=info["color"], linewidth=2.5, alpha=0.9)
         except FileNotFoundError:
             print(f" Thiếu dữ liệu file tiến trình loss tốt nhất của {name}")
 
